@@ -1,5 +1,5 @@
 import React from "react";
-import { Header } from "./components";
+import { Footer, Header } from "./components";
 
 import { WebsiteRoutes } from "./routes";
 
@@ -8,7 +8,7 @@ const App = () => {
     <div>
       <Header />
       <WebsiteRoutes />
-      This was made from Scratch! Also hello world!
+      <Footer />
     </div>
   );
 };
