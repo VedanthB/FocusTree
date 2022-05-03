@@ -4,7 +4,7 @@ const path = require("path");
 
 module.exports = {
   mode: "development",
-  entry: "./index.js",
+  entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "public"),
     filename: "main.js",
@@ -27,6 +27,11 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: "babel-loader",
+      },
+      // CSS rules
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
       },
     ],
   },

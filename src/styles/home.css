@@ -1,0 +1,22 @@
+.homePage__hero__container {
+  display: flex;
+}
+
+.homePage__banner__container {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 750px) {
+  .homePage__banner__container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .homePage__hero__container {
+    display: flex;
+    flex-direction: column;
+  }
+}
