@@ -1,0 +1,30 @@
+.tasksPage__container {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+
+  gap: 1rem;
+}
+
+.taskPage_grid_item {
+  height: 100vh;
+  overflow: scroll;
+}
+
+.taskPage_grid_item_heading {
+  margin-bottom: 2rem;
+  border-bottom: 1px dotted gray;
+}
+
+.task__card {
+  border-radius: 1rem;
+}
+
+.task__card:hover {
+  transform: scale(1.05);
+  border-color: rgba(249, 249, 249, 0.8);
+}
+
+@media screen and (max-width: 750px) {
+  .tasksPage__container {
+    grid-template-columns: 1fr;
+  }
+}
