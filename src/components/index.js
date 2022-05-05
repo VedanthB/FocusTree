@@ -2,3 +2,8 @@ export { default as Header } from "./global/Header";
 export { default as Footer } from "./global/Footer";
 export { default as HeroContainer } from "./home/HeroContainer";
 export { default as BannerContainer } from "./home/BannerContainer";
+export { default as Input } from "./global/Input";
+export { default as TextArea } from "./global/TextArea";
+export { default as Modal } from "./global/Modal";
+export { default as TaskList } from "./tasks/TaskList";
+export { default as CreateTaskForm } from "./tasks/CreateTaskForm";
