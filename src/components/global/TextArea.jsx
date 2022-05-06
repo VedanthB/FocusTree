@@ -14,7 +14,7 @@ const TextArea = ({ errorMessage, label, value, onChange, ...rest }) => {
       />
       <label
         style={{ backgroundColor: "white" }}
-        htmlDor="email"
+        htmlFor="email"
         className="input-label text-black"
       >
         {label} *
