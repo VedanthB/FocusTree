@@ -7,3 +7,5 @@ export { default as TextArea } from "./global/TextArea";
 export { default as Modal } from "./global/Modal";
 export { default as TaskList } from "./tasks/TaskList";
 export { default as CreateTaskForm } from "./tasks/CreateTaskForm";
+export { default as TaskDetailsHeader } from "./task-details/TaskDetailsHeader";
+export { default as TaskDetailsTabs } from "./task-details/TaskDetailsTabs";
