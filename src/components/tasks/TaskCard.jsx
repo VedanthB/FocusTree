@@ -3,12 +3,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useTheme } from "../../context";
 
-export const TaskCard = ({ id }) => {
+import moment from "moment";
+
+export const TaskCard = ({ task }) => {
   const { theme } = useTheme();
 
   return (
     <Link
-      to={`/tasks/${id}`}
+      to={`/tasks/${task._id}`}
       className={`flex flex-col shadow-xl p-4 bg-green-500 cursor-pointer task__card`}
       style={{
         border: "1px solid gray",
@@ -23,10 +25,7 @@ export const TaskCard = ({ id }) => {
           }}
           className={`text-white pr-3`}
         >
-          This is a taskThis This is a taskThis This is a taskThis This is a
-          taskThis This is a taskThis This is a taskThis This is a taskThis This
-          is a taskThis This is a taskThis This is a taskThis This is a taskThis
-          This is a taskThis
+          {task.title}
         </h3>
 
         <i
@@ -39,7 +38,9 @@ export const TaskCard = ({ id }) => {
       </div>
 
       <div className="mt-3 flex justify-between">
-        <span className="text-grey-600 ">created: 22/22/22 </span>
+        <span className="text-grey-600 ">
+          {moment(task.createdAt).fromNow()}
+        </span>
         <div>
           <i className="fa-solid fa-trash-can text-red-500 text-hover-rose-300"></i>
         </div>

@@ -11,14 +11,14 @@ const TaskPriorityDropdown = ({ taskPriority, onChange, errorMessage }) => {
           onChange={onChange}
         >
           <option value="none">none</option>
-          <option value="important and urgent">Important and Urgent</option>
-          <option value="important and not urgent">
+          <option value="Important and Urgent">Important and Urgent</option>
+          <option value="Important and Not Urgent">
             Important and Not Urgent
           </option>
-          <option value="not important and urgent">
+          <option value="Not Important and Urgent">
             Not Important and Urgent
           </option>
-          <option value="not important and not urgent">
+          <option value="Not Important and Not Urgent">
             Not Important and Not Urgent
           </option>
         </select>

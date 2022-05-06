@@ -1,22 +1,75 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState } from "react";
+import { useTasks } from "../../context";
+import { taskActions } from "../../context/constants";
 import Input from "../global/Input";
 
 import TextArea from "../global/TextArea";
 import TaskPriorityDropdown from "../tasks/TaskPriorityDropdown";
 
+import { v4 as uuidv4 } from "uuid";
+
 const CreateTaskForm = () => {
   const [taskDetails, setTaskDetails] = useState({
+    _id: null,
     title: "",
     description: "",
     "long break": 10,
     "short break": 5,
     pomorodo: 30,
     taskPriority: "none",
+    createdAt: "",
   });
 
+  const { tasksDispatch } = useTasks();
+
+  const handleCreateTaskHandler = (e) => {
+    e.preventDefault();
+
+    if (taskDetails.title.length < 6)
+      return "0/6 \nTitle needs to be at least 6 characters long.";
+
+    if (taskDetails.description.length < 10)
+      return "0/10 \nDescription needs to be at least 10 characters long.";
+
+    if (taskDetails.pomorodo <= 0)
+      return "Pomorodo timer can't be zero or less";
+
+    if (taskDetails["long break"] > 30)
+      return "Long break can't be more than 30";
+
+    if (taskDetails["short break"] > 15)
+      return "Short break can't be more than 15";
+
+    if (taskDetails.taskPriority === "none")
+      return "Please select the task priority";
+
+    tasksDispatch({
+      type: taskActions.CREATE_TASK,
+      payload: {
+        ...taskDetails,
+        _id: uuidv4(),
+        createdAt: new Date().toISOString(),
+      },
+    });
+
+    setTaskDetails({
+      _id: null,
+      title: "",
+      description: "",
+      "long break": 10,
+      "short break": 5,
+      pomorodo: 30,
+      taskPriority: "none",
+      createdAt: "",
+    });
+  };
+
   return (
-    <div style={{ height: "50vh", overflow: "scroll" }}>
+    <form
+      style={{ height: "50vh", overflow: "scroll" }}
+      onSubmit={handleCreateTaskHandler}
+    >
       <div className="flex justify-center align-items-center">
         <div className="avatar avatar-lg">
           <img
@@ -158,14 +211,13 @@ const CreateTaskForm = () => {
       <div className="spacer-3rem"></div>
 
       <button
-        onClick={() => {
-          console.log(taskDetails);
-        }}
+        type="submit"
+        onClick={(e) => handleCreateTaskHandler(e)}
         className="btn btn-solid-green shadow-lg text-white"
       >
         create task
       </button>
-    </div>
+    </form>
   );
 };
 
