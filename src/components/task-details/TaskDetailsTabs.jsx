@@ -9,11 +9,11 @@ const TaskDetailsTabs = ({ tabState, setTabState }) => {
       <div
         style={{ borderRadius: "1rem" }}
         className={`shadow-2xl h-10 p-4 flex justify-center align-items-center cursor-pointer  ${
-          tabState === "pomorodo" && "bg-green-500"
+          tabState === "pomodoro" && "bg-green-500"
         } text-white`}
-        onClick={() => setTabState("pomorodo")}
+        onClick={() => setTabState("pomodoro")}
       >
-        pomorodo
+        pomodoro
       </div>
       <div
         style={{ borderRadius: "1rem" }}
