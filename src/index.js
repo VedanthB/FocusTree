@@ -1,16 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
 import "./styles/index.css";
 
 import { BrowserRouter as Router } from "react-router-dom";
-import { ThemeProvider } from "./context";
+
+import App from "./App";
+
+import { TasksProvider, ThemeProvider } from "./context";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <ThemeProvider>
-        <App />
+        <TasksProvider>
+          <App />
+        </TasksProvider>
       </ThemeProvider>
     </Router>
   </React.StrictMode>,

@@ -17,28 +17,16 @@ const Tasks = () => {
 
       <div className={`grid tasksPage__container p-6 m-2 rounded-2xl`}>
         <div className="">
-          <TaskList
-            category={"Important and Urgent"}
-            tasks={[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}
-          />
+          <TaskList category={"Important and Urgent"} />
         </div>
         <div className="">
-          <TaskList
-            category={"Important and Not Urgent"}
-            tasks={[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 11]}
-          />
+          <TaskList category={"Important and Not Urgent"} />
         </div>
         <div className="">
-          <TaskList
-            category={"Not Important and Urgent"}
-            tasks={[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}
-          />
+          <TaskList category={"Not Important and Urgent"} />
         </div>
         <div className="">
-          <TaskList
-            category={"Not Important and Not Urgent"}
-            tasks={[1, 1, 1, 1, 1]}
-          />
+          <TaskList category={"Not Important and Not Urgent"} />
         </div>
       </div>
       <Modal

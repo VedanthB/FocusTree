@@ -5,8 +5,8 @@
   "main": "./src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server .",
-    "build": "Webpack .",
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet"
   },
@@ -31,10 +31,12 @@
     "webpack-dev-server": "^4.8.1"
   },
   "dependencies": {
+    "moment": "^2.29.3",
     "react": "^18.1.0",
     "react-circular-progressbar": "^2.0.4",
     "react-dom": "^18.1.0",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "uuid": "^8.3.2"
   },
   "repository": {
     "type": "git",

@@ -1,9 +1,11 @@
 import React from "react";
-import { useTheme } from "../../context";
+import { useTasks, useTheme } from "../../context";
 import { TaskCard } from "./TaskCard";
 
-const TaskList = ({ tasks, category }) => {
+const TaskList = ({ category }) => {
   const { theme } = useTheme();
+
+  const { tasksState } = useTasks();
 
   return (
     <>
@@ -18,9 +20,13 @@ const TaskList = ({ tasks, category }) => {
         className={`flex flex-col p-4  rounded taskPage_grid_item`}
         style={{ gap: "1rem" }}
       >
-        {tasks.map((i) => (
-          <TaskCard key={i} id={i} />
-        ))}
+        {tasksState.tasks &&
+          tasksState.tasks.map(
+            (task) =>
+              task.taskPriority === category && (
+                <TaskCard key={task._id} task={task} />
+              )
+          )}
       </ul>
     </>
   );
