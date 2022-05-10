@@ -27,6 +27,18 @@ const TaskList = ({ category }) => {
                 <TaskCard key={task._id} task={task} />
               )
           )}
+
+        {!tasksState.tasks.length && (
+          <h4
+            className={
+              theme === "light"
+                ? "text-black text-center"
+                : "text-white text-center"
+            }
+          >
+            Please add tasks to start focusing
+          </h4>
+        )}
       </ul>
     </>
   );
