@@ -46,3 +46,27 @@
   opacity: 1;
   transition: all 1s;
 }
+
+.pomodoro-app__preferences {
+  background: none;
+  border: 0;
+  transition: transform 0.15s ease-in-out;
+  cursor: pointer;
+  margin: auto;
+}
+
+.pomodoro-app__preferences:hover {
+  transform: scale(1.4) rotate(45deg);
+}
+
+.taskCard__link:hover {
+  transform: scale(1.05);
+  /* text-decoration: underline; */
+}
+
+.taskCard__link {
+  padding: 0.5rem 1rem;
+  border: 1px solid white;
+  border-radius: 8px;
+  color: white;
+}

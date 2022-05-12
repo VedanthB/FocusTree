@@ -1,16 +1,16 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
-import { useTheme } from "../../context";
 
 import moment from "moment";
+import { taskActions } from "../../context/constants";
+import { useTasks } from "../../context";
 
 export const TaskCard = ({ task }) => {
-  const { theme } = useTheme();
+  const { tasksDispatch } = useTasks();
 
   return (
-    <Link
-      to={`/tasks/${task._id}`}
+    <div
       className={`flex flex-col shadow-xl p-4 bg-green-500 cursor-pointer task__card`}
       style={{
         border: "1px solid gray",
@@ -27,24 +27,32 @@ export const TaskCard = ({ task }) => {
         >
           {task.title}
         </h3>
+      </div>
 
-        <i
-          className={`fa-solid fa-pen-to-square ${
-            theme === "light"
-              ? "text-white text-hover-grey-600"
-              : "text-white text-hover-grey-200"
-          } `}
-        ></i>
+      <div className="mt-3 flex justify-start">
+        <span className="text-grey-600">
+          {moment(task.createdAt).fromNow()}
+        </span>
       </div>
 
       <div className="mt-3 flex justify-between">
-        <span className="text-grey-600 ">
-          {moment(task.createdAt).fromNow()}
-        </span>
+        <Link to={`/tasks/${task._id}`} className="taskCard__link">
+          Start Focusing
+        </Link>
         <div>
-          <i className="fa-solid fa-trash-can text-red-500 text-hover-rose-300"></i>
+          <i
+            onClick={() =>
+              tasksDispatch({
+                type: taskActions.DELETE_TASK,
+                payload: {
+                  ...task,
+                },
+              })
+            }
+            className="fa-solid text-2xl fa-trash-can text-red-500 text-hover-rose-300"
+          ></i>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };

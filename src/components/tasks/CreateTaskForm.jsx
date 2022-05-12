@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTasks } from "../../context";
 import { taskActions } from "../../context/constants";
 import Input from "../global/Input";
@@ -9,19 +9,30 @@ import TaskPriorityDropdown from "../tasks/TaskPriorityDropdown";
 
 import { v4 as uuidv4 } from "uuid";
 
-const CreateTaskForm = () => {
+const CreateTaskForm = ({ task }) => {
   const [taskDetails, setTaskDetails] = useState({
     _id: null,
     title: "",
     description: "",
     "long break": 10,
     "short break": 5,
-    pomorodo: 30,
+    pomodoro: 30,
     taskPriority: "none",
     createdAt: "",
   });
 
   const { tasksDispatch } = useTasks();
+
+  useEffect(() => {
+    if (task) {
+      setTaskDetails({
+        ...task,
+        "long break": task["long break"] / 60,
+        "short break": task["short break"] / 60,
+        pomodoro: task.pomodoro / 60,
+      });
+    }
+  }, []);
 
   const handleCreateTaskHandler = (e) => {
     e.preventDefault();
@@ -32,8 +43,8 @@ const CreateTaskForm = () => {
     if (taskDetails.description.length < 10)
       return "0/10 \nDescription needs to be at least 10 characters long.";
 
-    if (taskDetails.pomorodo <= 0)
-      return "Pomorodo timer can't be zero or less";
+    if (taskDetails.pomodoro <= 0)
+      return "Pomodoro timer can't be zero or less";
 
     if (taskDetails["long break"] > 30)
       return "Long break can't be more than 30";
@@ -44,11 +55,28 @@ const CreateTaskForm = () => {
     if (taskDetails.taskPriority === "none")
       return "Please select the task priority";
 
+    if (task) {
+      tasksDispatch({
+        type: taskActions.DELETE_TASK,
+        payload: {
+          ...taskDetails,
+          _id: task._id,
+          "long break": taskDetails["long break"] * 60,
+          "short break": taskDetails["short break"] * 60,
+          pomodoro: taskDetails.pomodoro * 60,
+          createdAt: new Date().toISOString(),
+        },
+      });
+    }
+
     tasksDispatch({
       type: taskActions.CREATE_TASK,
       payload: {
         ...taskDetails,
         _id: uuidv4(),
+        "long break": taskDetails["long break"] * 60,
+        "short break": taskDetails["short break"] * 60,
+        pomodoro: taskDetails.pomodoro * 60,
         createdAt: new Date().toISOString(),
       },
     });
@@ -59,7 +87,54 @@ const CreateTaskForm = () => {
       description: "",
       "long break": 10,
       "short break": 5,
-      pomorodo: 30,
+      pomodoro: 30,
+      taskPriority: "none",
+      createdAt: "",
+    });
+  };
+
+  const handleUpdateTaskHandler = (e) => {
+    e.preventDefault();
+
+    if (taskDetails.title.length < 6)
+      return "0/6 \nTitle needs to be at least 6 characters long.";
+
+    if (taskDetails.description.length < 10)
+      return "0/10 \nDescription needs to be at least 10 characters long.";
+
+    if (taskDetails.pomodoro <= 0)
+      return "Pomodoro timer can't be zero or less";
+
+    if (taskDetails["long break"] > 30)
+      return "Long break can't be more than 30";
+
+    if (taskDetails["short break"] > 15)
+      return "Short break can't be more than 15";
+
+    if (taskDetails.taskPriority === "none")
+      return "Please select the task priority";
+
+    if (task) {
+      tasksDispatch({
+        type: taskActions.UPDATE_TASK,
+        payload: {
+          ...taskDetails,
+          _id: task._id,
+          "long break": taskDetails["long break"] * 60,
+          "short break": taskDetails["short break"] * 60,
+          pomodoro: taskDetails.pomodoro * 60,
+          createdAt: new Date().toISOString(),
+        },
+      });
+    }
+
+    setTaskDetails({
+      _id: null,
+      title: "",
+      description: "",
+      "long break": 10,
+      "short break": 5,
+      pomodoro: 30,
       taskPriority: "none",
       createdAt: "",
     });
@@ -135,17 +210,17 @@ const CreateTaskForm = () => {
         <div className="w-44">
           <Input
             type={"number"}
-            value={taskDetails.pomorodo}
-            name="pomorodo"
+            value={taskDetails.pomodoro}
+            name="pomodoro"
             onChange={(e) => {
               const { name, value } = e.target;
 
               setTaskDetails({ ...taskDetails, [name]: parseInt(value) });
             }}
-            label={"Pomorodo"}
+            label={"Pomodoro"}
             errorMessage={
-              taskDetails.pomorodo <= 0 &&
-              "Pomorodo timer can't be zero or less"
+              taskDetails.pomodoro <= 0 &&
+              "Pomodoro timer can't be zero or less"
             }
             required
           />
@@ -212,10 +287,12 @@ const CreateTaskForm = () => {
 
       <button
         type="submit"
-        onClick={(e) => handleCreateTaskHandler(e)}
+        onClick={(e) =>
+          task ? handleUpdateTaskHandler(e) : handleCreateTaskHandler(e)
+        }
         className="btn btn-solid-green shadow-lg text-white"
       >
-        create task
+        {task ? "edit task" : "create task"}
       </button>
     </form>
   );
