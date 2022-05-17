@@ -13,6 +13,10 @@ import {
   CreateTaskForm,
 } from "../components";
 import { useTasks } from "../context";
+import useSound from "use-sound";
+import timesUpSfx from "../sounds/timesUp.mp3";
+import startSfx from "../sounds/startTimer.mp3";
+import pauseSfx from "../sounds/pauseTimer.mp3";
 
 const TaskDetails = () => {
   const { taskId } = useParams();
@@ -38,6 +42,17 @@ const TaskDetails = () => {
 
   const [showModal, setShowModal] = useState(false);
 
+  const [timesUp] = useSound(timesUpSfx, {
+    volume: 1,
+  });
+  const [playSound] = useSound(startSfx, {
+    interrupt: true,
+    volume: 1,
+  });
+  const [pause] = useSound(pauseSfx, {
+    interupt: true,
+    volume: 1,
+  });
   const changeTimerImage = () => {
     if (timer * 2 === time) {
       setTimerImagePlant("timerImagePlant__hide");
@@ -70,11 +85,15 @@ const TaskDetails = () => {
   useEffect(() => {
     if (play) {
       let intervalId = setInterval(() => {
-        if (time >= 0) {
+        if (timer >= 0) {
           setTimer((timer) => timer - 1);
         }
       }, 1000);
       return () => clearInterval(intervalId);
+    }
+
+    if (timer === 0) {
+      timesUp();
     }
   }, [timer, play]);
 
@@ -110,6 +129,15 @@ const TaskDetails = () => {
 
     changeTimerImage();
   }, [tabState]);
+
+  useEffect(() => {
+    if (play) {
+      pause();
+    }
+    if (!play) {
+      playSound();
+    }
+  }, [play]);
 
   return (
     <>
