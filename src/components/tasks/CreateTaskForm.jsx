@@ -9,7 +9,7 @@ import TaskPriorityDropdown from "../tasks/TaskPriorityDropdown";
 
 import { v4 as uuidv4 } from "uuid";
 
-const CreateTaskForm = ({ task }) => {
+const CreateTaskForm = ({ task, setShowModal }) => {
   const [taskDetails, setTaskDetails] = useState({
     _id: null,
     title: "",
@@ -91,6 +91,8 @@ const CreateTaskForm = ({ task }) => {
       taskPriority: "none",
       createdAt: "",
     });
+
+    setShowModal(false);
   };
 
   const handleUpdateTaskHandler = (e) => {
@@ -138,6 +140,8 @@ const CreateTaskForm = ({ task }) => {
       taskPriority: "none",
       createdAt: "",
     });
+
+    setShowModal(false);
   };
 
   return (

@@ -45,14 +45,17 @@ const TaskDetails = () => {
   const [timesUp] = useSound(timesUpSfx, {
     volume: 1,
   });
+
   const [playSound] = useSound(startSfx, {
     interrupt: true,
     volume: 1,
   });
+
   const [pause] = useSound(pauseSfx, {
     interupt: true,
     volume: 1,
   });
+
   const changeTimerImage = () => {
     if (timer * 2 === time) {
       setTimerImagePlant("timerImagePlant__hide");
@@ -243,7 +246,7 @@ const TaskDetails = () => {
       <Modal
         showModal={showModal}
         setShowModal={setShowModal}
-        modalBody={<CreateTaskForm task={task} />}
+        modalBody={<CreateTaskForm task={task} setShowModal={setShowModal} />}
         modalTitle={"Edit Task"}
       />
     </>
