@@ -32,7 +32,7 @@ const Tasks = () => {
       <Modal
         showModal={showModal}
         setShowModal={setShowModal}
-        modalBody={<CreateTaskForm />}
+        modalBody={<CreateTaskForm setShowModal={setShowModal} />}
         modalTitle={"Create a Task"}
       />
       <div className="spacer-3rem"> </div>

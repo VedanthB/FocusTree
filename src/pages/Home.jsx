@@ -7,9 +7,6 @@ const Home = () => {
       <HeroContainer />
 
       <BannerContainer />
-
-      <div className="spacer-3rem"> </div>
-      <div className="spacer-3rem"> </div>
     </div>
   );
 };

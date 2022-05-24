@@ -13,6 +13,8 @@ const Footer = () => {
         </span>{" "}
         by
         <a
+          target="_blank"
+          rel="noreferrer"
           href="https://github.com/VedanthB"
           style={{ padding: "0", textTransform: "none" }}
           className="ml-1 btn btn-link-green"
@@ -21,22 +23,32 @@ const Footer = () => {
         </a>
       </div>
       <div className="flex mt-3 align-items-center justify-center">
-        <a href="https://github.com/VedanthB">
+        <a target="_blank" rel="noreferrer" href="https://github.com/VedanthB">
           <i className="fab fa-github mr-2 text-green-700"></i>
         </a>
-        <a href="https://twitter.com/vedanth_X0X0">
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href="https://twitter.com/vedanth_X0X0"
+        >
           <i className="fab fa-twitter mr-2 text-green-700"></i>
         </a>
-        <a href="https://www.linkedin.com/in/vedanth-bora/">
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href="https://www.linkedin.com/in/vedanth-bora/"
+        >
           <i className="fab fa-linkedin mr-2 text-green-700"></i>
         </a>
-        <a href="https://dev.to/vedanthb">
+        <a target="_blank" rel="noreferrer" href="https://dev.to/vedanthb">
           <i className="fab fa-dev text-green-700"></i>
         </a>
       </div>
       <div className="text-grey-700 mt-3">
         Designed using
         <a
+          target="_blank"
+          rel="noreferrer"
           href="https://argon-css.netlify.app/"
           style={{ padding: 0, textTransform: "none" }}
           className="ml-1 btn btn-link-green"
